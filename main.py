@@ -8,6 +8,7 @@ import sys
 from finbert.finbert import predict
 from pytorch_pretrained_bert.modeling import BertForSequenceClassification
 import nltk
+import os
 # from transformers import AutoModelForSequenceClassification
 
 nltk.download('punkt')
@@ -26,5 +27,12 @@ def score():
     return(predict(text, model).to_json(orient='records'))
 
 
+@app.route("/live/ping", methods=['GET'])
+def live():
+    return 'OK'
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8102, debug=False, threaded=True)
+    hostEnv = os.getenv('HOST_URL', '0.0.0.0')
+    portEnv = os.getenv('HOST_PORT', 8102)
+    app.run(host=hostEnv, port=portEnv, debug=False, threaded=True)
+    # app.run(host='0.0.0.0', port=8102, debug=False, threaded=True)

@@ -112,3 +112,8 @@ localhost:8102/sentiment
 {
 "text": "msft is doing good"
 }
+
+## enviornment variable
+
+HOST_URL = '0.0.0.0'
+HOST_PORT = 8101
